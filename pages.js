@@ -7,7 +7,6 @@ function catKey(c) { return ({ 'Pain Relief':'cat_pain','Diabetes':'cat_diabetes
 function catLabel(c) { const k = catKey(c); return k ? _T(k) : c; }
 function loadMeds() {
   if (MEDS) return Promise.resolve(MEDS);
-  // Prefer admin-edited inventory if present
   const inv = window.Inventory ? window.Inventory.load(null) : null;
   if (inv && Array.isArray(inv) && inv.length) { MEDS = inv; return Promise.resolve(MEDS); }
   return fetch('assets/medicines.json').then(r => r.json()).then(d => { MEDS = d; if (window.Inventory) window.Inventory.save(d); return d; });
@@ -109,7 +108,12 @@ if (P === 'contact') {
 if (P === 'cart') {
   const list = document.getElementById('cartList'), empty = document.getElementById('cartEmpty'),
         subEl = document.getElementById('cartSubtotal'), totEl = document.getElementById('cartTotal'),
-        cob = document.getElementById('checkoutBtn'), clb = document.getElementById('clearBtn');
+        cob = document.getElementById('checkoutBtn'), clb = document.getElementById('clearBtn'),
+        paySel = document.getElementById('coPay'), payOnlineOpt = document.getElementById('payOnlineOpt'),
+        modePill = document.getElementById('checkoutMode'), note = document.getElementById('coNote');
+
+  if (window.Payment && window.Payment.enabled && payOnlineOpt) payOnlineOpt.hidden = false;
+
   function row(i) {
     return '<div class="cart-row" data-name="' + esc(i.name) + '"><div><div class="cart-row__name">' + esc(i.name) + '</div><p class="cart-row__sub">' + esc(i.salt || '') + (i.pack ? ' · ' + esc(i.pack) : '') + '</p></div>'
     + '<div class="qty"><button class="qty__btn" data-dec aria-label="−">−</button><input class="qty__input" type="number" min="1" value="' + i.qty + '" /><button class="qty__btn" data-inc aria-label="+">+</button></div>'
@@ -121,7 +125,16 @@ if (P === 'cart') {
     else { empty.hidden = true; cob.disabled = false; clb.disabled = false; list.innerHTML = it.map(row).join(''); }
     const s = window.Cart.total();
     subEl.textContent = '₹' + s; totEl.textContent = '₹' + s;
+    refreshMode();
   }
+  function refreshMode() {
+    const online = paySel.value === 'razorpay';
+    modePill.textContent = online ? 'Online payment' : 'WhatsApp';
+    cob.textContent = online ? 'Pay ₹' + window.Cart.total() + ' now' : 'Place order on WhatsApp';
+    note.textContent = online ? 'Secure payment via Razorpay (UPI / Card / Netbanking). We dispatch as soon as payment is confirmed.' : 'We confirm availability and ETA within 5 minutes.';
+  }
+  paySel.addEventListener('change', refreshMode);
+
   list.addEventListener('click', e => {
     const w = e.target.closest('.cart-row'); if (!w) return;
     const n = w.dataset.name, it = window.Cart.get().find(x => x.name === n); if (!it) return;
@@ -134,22 +147,38 @@ if (P === 'cart') {
     window.Cart.setQty(e.target.closest('.cart-row').dataset.name, parseInt(e.target.value, 10) || 1);
   });
   document.addEventListener('cart:change', render);
-  cob.addEventListener('click', () => {
+
+  function payMethodLabel(v) { return ({ cod: 'Cash on delivery', 'upi-cod': 'UPI on delivery', 'card-cod': 'Card on delivery', razorpay: 'Paid online (Razorpay)' })[v] || v; }
+
+  function placeOrder() {
     const it = window.Cart.get(); if (!it.length) return;
     const n = (document.getElementById('coName').value || '').trim();
     const ph = (document.getElementById('coPhone').value || '').trim();
     const ad = (document.getElementById('coAddress').value || '').trim();
-    const py = document.getElementById('coPay').value;
+    const pv = paySel.value;
     if (!n || !ph || !ad) return alert('Please fill name, phone, and delivery address.');
     const total = window.Cart.total();
-    const order = { id: window.makeOrderId(), customer: { name: n, phone: ph, address: ad }, items: it, total: total, payment: py, status: 'Pending', createdAt: new Date().toISOString() };
-    window.Orders.add(order);
-    const lines = it.map(i => '• ' + i.name + ' × ' + i.qty + ' = ₹' + (i.qty * i.price));
-    const msg = ['Hi ' + window.PHARMACY_CONFIG.name + ', new order ' + order.id + ':', '', 'Customer: ' + n, 'Phone: ' + ph, 'Address: ' + ad, 'Payment: ' + py, '', 'Items:'].concat(lines, ['', 'Total: ₹' + total, 'Delivery: Free']).join('\n');
-    window.Cart.clear();
-    window.open(window.waUrl(msg), '_blank', 'noopener');
-    alert('Order ' + order.id + ' saved. We are opening WhatsApp to confirm.');
-  });
+    const baseOrder = { id: window.makeOrderId(), customer: { name: n, phone: ph, address: ad }, items: it, total: total, payment: payMethodLabel(pv), status: 'Pending', createdAt: new Date().toISOString() };
+
+    function finish(order) {
+      (window.Backend ? window.Backend.saveOrder(order) : Promise.resolve(window.Orders.add(order))).then(() => {
+        const lines = order.items.map(i => '• ' + i.name + ' × ' + i.qty + ' = ₹' + (i.qty * i.price));
+        const msg = ['Hi ' + window.PHARMACY_CONFIG.name + ', new order ' + order.id + ':', '', 'Customer: ' + n, 'Phone: ' + ph, 'Address: ' + ad, 'Payment: ' + order.payment + (order.paymentId ? ' (Payment ID ' + order.paymentId + ')' : ''), '', 'Items:'].concat(lines, ['', 'Total: ₹' + total, 'Delivery: Free']).join('\n');
+        window.Cart.clear();
+        window.open(window.waUrl(msg), '_blank', 'noopener');
+        alert('Order ' + order.id + ' saved. We are opening WhatsApp to confirm.');
+      }).catch(err => alert('Could not save order: ' + (err.message || err)));
+    }
+
+    if (pv === 'razorpay' && window.Payment && window.Payment.enabled) {
+      window.Payment.payRazorpay({
+        order: baseOrder, customer: baseOrder.customer,
+        onSuccess: pid => finish(Object.assign({}, baseOrder, { paymentId: pid, status: 'Paid' })),
+        onCancel: () => alert('Payment cancelled. Your cart is intact.')
+      });
+    } else { finish(baseOrder); }
+  }
+  cob.addEventListener('click', placeOrder);
   clb.addEventListener('click', () => { if (confirm('Clear all items from your cart?')) window.Cart.clear(); });
   render();
 }
