@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact · MediCare Pharmacy</title>
+<meta name="description" content="Visit, call, or WhatsApp MediCare Pharmacy in Patna. Open 8 AM – 11 PM, 7 days a week."/>
+<meta name="theme-color" content="#0f9d8a"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head><body data-page="contact" data-title="Contact">
+<div data-header></div>
+<main>
+  <section class="hero hero--page"><div class="container">
+    <span class="eyebrow"><span class="dot"></span> Reply within 5 minutes</span>
+    <h1>Talk to us.</h1>
+    <p class="lede">Visit our store, call, or send a WhatsApp — whichever is easiest for you.</p>
+  </div></section>
+  <section class="section section--sm"><div class="container split split--reverse">
+    <div class="split__copy">
+      <span class="eyebrow eyebrow--muted">Visit us</span>
+      <h2 data-bind="name">MediCare Pharmacy</h2>
+      <p data-bind="address">123 Boring Road, Patna, Bihar 800001</p>
+      <ul class="contact__list">
+        <li>📞 <a href="tel:+919876543210" data-bind="phone">+91 98765 43210</a></li>
+        <li>💬 <a href="#" data-action="whatsapp">WhatsApp us</a></li>
+        <li>✉️ <a href="mailto:hello@medicarepatna.in" data-bind="email">hello@medicarepatna.in</a></li>
+        <li>🕒 <span data-bind="hours">8 AM – 11 PM · Open 7 days</span></li>
+      </ul>
+      <div class="hero__cta"><a class="btn btn--primary" data-action="whatsapp" href="#">Chat on WhatsApp</a><a class="btn btn--ghost" id="directionsBtn" href="#" target="_blank" rel="noopener">Get directions</a></div>
+    </div>
+    <div class="split__visual"><div class="map"><iframe id="mapFrame" title="Pharmacy location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe></div></div>
+  </div></section>
+  <section class="section section--alt"><div class="container" style="max-width:680px">
+    <header class="section__head"><span class="eyebrow eyebrow--muted">Send a message</span><h2>Or fill the form</h2><p>We'll open WhatsApp with your message pre-filled.</p></header>
+    <form class="card" id="contactForm">
+      <label class="field"><span>Your name</span><input type="text" name="cname" required/></label>
+      <label class="field"><span>Phone (optional)</span><input type="tel" name="cphone"/></label>
+      <label class="field"><span>Message</span><textarea name="cmessage" required placeholder="How can we help?"></textarea></label>
+      <button type="submit" class="btn btn--primary btn--block">Send via WhatsApp</button>
+    </form>
+  </div></section>
+</main>
+<div data-footer></div>
+<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="script.js" defer></script><script src="pages.js" defer></script>
+</body></html>

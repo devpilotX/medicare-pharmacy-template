@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://devpilotx.github.io/medicare-pharmacy-template/sitemap.xml

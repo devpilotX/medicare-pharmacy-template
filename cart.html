@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cart & Checkout · MediCare Pharmacy</title>
+<meta name="description" content="Review your medicines and place the order on WhatsApp. Free delivery within 5 km."/>
+<meta name="theme-color" content="#0f9d8a"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head><body data-page="cart" data-title="Cart">
+<div data-header></div>
+<main>
+  <section class="hero hero--page"><div class="container">
+    <span class="eyebrow"><span class="dot"></span> Free delivery in 5 km</span>
+    <h1>Your cart</h1>
+    <p class="lede">Review your medicines. We'll send the complete order to WhatsApp in one tap.</p>
+  </div></section>
+  <section class="section section--sm"><div class="container">
+    <div class="cart-grid">
+      <div>
+        <div class="cart-list" id="cartList"></div>
+        <p class="empty" id="cartEmpty" hidden>Your cart is empty. <a href="medicines.html" style="color:var(--brand);font-weight:600">Browse medicines →</a></p>
+        <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <a class="btn btn--ghost" href="medicines.html">← Continue shopping</a>
+          <button class="btn btn--danger" id="clearBtn">Clear cart</button>
+        </div>
+      </div>
+      <aside class="checkout"><div class="card">
+        <div class="card__header"><h2>Checkout</h2><span class="pill">WhatsApp</span></div>
+        <label class="field"><span>Full name</span><input type="text" id="coName" required placeholder="e.g. Rohit Sharma"/></label>
+        <label class="field"><span>Phone number</span><input type="tel" id="coPhone" required placeholder="e.g. 98765 43210"/></label>
+        <label class="field"><span>Delivery address</span><textarea id="coAddress" required placeholder="House no, street, area, landmark"></textarea></label>
+        <label class="field"><span>Payment</span><select id="coPay"><option>Cash on delivery</option><option>UPI on delivery</option><option>Card on delivery</option></select></label>
+        <div class="checkout__totals">
+          <div class="checkout__row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+          <div class="checkout__row"><span>Delivery</span><span style="color:var(--brand-2);font-weight:700">Free</span></div>
+          <div class="checkout__row checkout__row--total"><span>Total</span><span id="cartTotal">₹0</span></div>
+        </div>
+        <button class="btn btn--primary btn--block" id="checkoutBtn" disabled>Place order on WhatsApp</button>
+        <p class="card__note">We confirm availability and ETA within 5 minutes.</p>
+      </div></aside>
+    </div>
+  </div></section>
+</main>
+<div data-footer></div>
+<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="script.js" defer></script><script src="pages.js" defer></script>
+</body></html>

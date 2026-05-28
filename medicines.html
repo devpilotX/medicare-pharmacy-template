@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Medicines · MediCare Pharmacy</title>
+<meta name="description" content="Search and order from 5,000+ medicines. Pain relief, diabetes, heart, vitamins, antibiotics. Free home delivery in Patna."/>
+<meta name="theme-color" content="#0f9d8a"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head><body data-page="medicines" data-title="Medicines">
+<div data-header></div>
+<main>
+  <section class="hero hero--page"><div class="container">
+    <span class="eyebrow"><span class="dot"></span> 5,000+ medicines in stock</span>
+    <h1>Find your medicine. <span class="accent">Order in seconds.</span></h1>
+    <p class="lede">Search by brand or salt. Add to cart and place the whole order on WhatsApp.</p>
+  </div></section>
+  <section class="section section--sm"><div class="container">
+    <div class="searchbar"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg>
+      <input type="search" id="medSearch" placeholder="Search for paracetamol, insulin, vitamin D…"/>
+      <span class="searchbar__count" id="searchCount">—</span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="filter-bar"><span style="color:var(--muted);font-size:14px">Browse the full catalog</span>
+      <select class="sort-sel" id="sortSel"><option value="default">Sort: Featured</option><option value="name">Name (A–Z)</option><option value="price-asc">Price (low to high)</option><option value="price-desc">Price (high to low)</option></select>
+    </div>
+    <div class="grid grid--meds" id="medGrid"></div>
+    <p class="empty" id="medEmpty" hidden>No medicines match your search. Try a different name or send the prescription on WhatsApp.</p>
+  </div></section>
+</main>
+<div data-footer></div>
+<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="script.js" defer></script><script src="pages.js" defer></script>
+</body></html>

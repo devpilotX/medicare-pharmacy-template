@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Upload Prescription · MediCare Pharmacy</title>
+<meta name="description" content="Snap a photo of your doctor's prescription. Send it on WhatsApp. Get medicines delivered in 30 minutes."/>
+<meta name="theme-color" content="#0f9d8a"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head><body data-page="prescription" data-title="Prescription">
+<div data-header></div>
+<main>
+  <section class="hero hero--page"><div class="container">
+    <span class="eyebrow"><span class="dot"></span> Free · Private · Fast</span>
+    <h1>Upload your prescription. <span class="accent">We do the rest.</span></h1>
+    <p class="lede">A pharmacist reads your prescription, confirms availability and price, and dispatches a rider — all on WhatsApp.</p>
+  </div></section>
+  <section class="section section--sm"><div class="container" style="max-width:720px">
+    <div class="card">
+      <div class="card__header"><h2>Send your prescription</h2><span class="pill">5-min reply</span></div>
+      <label class="upload-zone" for="rxFile">
+        <div class="upload-zone__icon">📄</div>
+        <div class="upload-zone__label" id="rxFileLabel">Tap to attach a photo or PDF</div>
+        <div class="upload-zone__hint">JPG, PNG, or PDF. You'll re-attach inside WhatsApp.</div>
+        <input type="file" id="rxFile" accept="image/*,.pdf"/>
+      </label>
+      <label class="field" style="margin-top:16px"><span>Note for the pharmacist (optional)</span>
+        <textarea id="rxNote" placeholder="e.g. Please confirm if generic alternatives are okay."></textarea>
+      </label>
+      <button class="btn btn--primary btn--block" id="rxSend">Open WhatsApp to send</button>
+      <p class="card__note">Your prescription is private. We never share it with anyone outside our pharmacy.</p>
+    </div>
+  </div></section>
+  <section class="section"><div class="container">
+    <header class="section__head"><span class="eyebrow eyebrow--muted">How it works</span><h2>3 simple steps</h2></header>
+    <div class="grid grid--features">
+      <div class="feature"><div class="feature__icon">1️⃣</div><h3>Snap</h3><p>Click a clear photo of the prescription — make sure the doctor's name and medicines are readable.</p></div>
+      <div class="feature"><div class="feature__icon">2️⃣</div><h3>Send</h3><p>Tap upload. WhatsApp opens with your note. Attach the photo and press send.</p></div>
+      <div class="feature"><div class="feature__icon">3️⃣</div><h3>Get it</h3><p>We confirm price and ETA. Rider arrives at your door — pay cash or UPI.</p></div>
+    </div>
+  </div></section>
+  <section class="section section--alt"><div class="container">
+    <header class="section__head"><span class="eyebrow eyebrow--muted">FAQ</span><h2>Common questions</h2></header>
+    <div class="faq">
+      <details class="faq__item"><summary>Is my prescription kept private?</summary><p>Yes. Only our licensed pharmacist sees it. We don't share it with any third party.</p></details>
+      <details class="faq__item"><summary>What if a medicine is out of stock?</summary><p>We'll suggest a substitute of the same composition (with your approval), or refund the amount.</p></details>
+      <details class="faq__item"><summary>Do I need a prescription for every medicine?</summary><p>Only for schedule-H drugs (antibiotics, painkillers above OTC limits, etc.). General items don't need one.</p></details>
+      <details class="faq__item"><summary>Can I send a hand-written note instead?</summary><p>For OTC items — yes. For prescription medicines, we need a valid doctor's prescription.</p></details>
+    </div>
+  </div></section>
+</main>
+<div data-footer></div>
+<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="script.js" defer></script><script src="pages.js" defer></script>
+</body></html>

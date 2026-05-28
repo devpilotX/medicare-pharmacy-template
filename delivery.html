@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Delivery · MediCare Pharmacy</title>
+<meta name="description" content="Free home delivery in 30 minutes within 5 km in Patna. Live tracking on WhatsApp."/>
+<meta name="theme-color" content="#0f9d8a"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head><body data-page="delivery" data-title="Delivery">
+<div data-header></div>
+<main>
+  <section class="hero hero--page"><div class="container">
+    <span class="eyebrow"><span class="dot"></span> Free across 5 km</span>
+    <h1>Delivery in <span class="accent">under 30 minutes</span>.</h1>
+    <p class="lede">Real riders, real-time updates on WhatsApp. Pay cash, UPI, or card on delivery.</p>
+  </div></section>
+  <section class="section"><div class="container">
+    <header class="section__head"><span class="eyebrow eyebrow--muted">How we deliver</span><h2>Fast, free, and tracked</h2></header>
+    <div class="grid grid--features">
+      <div class="feature"><div class="feature__icon">⏱️</div><h3>30-min target</h3><p>Average across our 5 km zone. Outside? We deliver too, with a small fee.</p></div>
+      <div class="feature"><div class="feature__icon">💸</div><h3>No prepayment</h3><p>Cash, UPI, or card. Pay only when the medicine reaches your door.</p></div>
+      <div class="feature"><div class="feature__icon">📲</div><h3>WhatsApp tracking</h3><p>Get a ping when the rider leaves, and another when they're 2 minutes away.</p></div>
+      <div class="feature"><div class="feature__icon">❄️</div><h3>Cold-chain ready</h3><p>Insulin, vaccines, and other temperature-sensitive items in insulated boxes.</p></div>
+      <div class="feature"><div class="feature__icon">🔁</div><h3>Auto refills</h3><p>Monthly medicines re-deliver themselves. One-time setup, no missed doses.</p></div>
+      <div class="feature"><div class="feature__icon">🌙</div><h3>Late-night service</h3><p>Open till 11 PM, 7 days a week. Emergency? Call us.</p></div>
+    </div>
+  </div></section>
+  <section class="section section--alt"><div class="container split">
+    <div class="split__copy">
+      <span class="eyebrow eyebrow--muted">Areas we cover</span>
+      <h2>Patna neighbourhoods</h2>
+      <p>We deliver free within 5 km of Boring Road. Outside this radius, a small fee applies based on distance.</p>
+      <ul class="steps">
+        <li><strong>✓</strong> Boring Road, Patliputra</li>
+        <li><strong>✓</strong> Rajendra Nagar, Kankarbagh</li>
+        <li><strong>✓</strong> Kurji, Bailey Road, Danapur</li>
+        <li><strong>✓</strong> Gandhi Maidan, Bankipore</li>
+        <li><strong>✓</strong> S.K. Puri, Kidwaipuri, Patna Junction area</li>
+      </ul>
+      <a class="btn btn--primary" data-action="whatsapp" data-message="Hi, do you deliver to my area?" href="#">Check your area on WhatsApp</a>
+    </div>
+    <div class="split__visual"><div class="card">
+      <div class="card__header"><h2>Track your order</h2><span class="pill">Live</span></div>
+      <label class="field"><span>Order ID</span><input type="text" id="orderId" placeholder="e.g. MC-1042"/></label>
+      <button class="btn btn--primary btn--block" id="trackBtn">Get status on WhatsApp</button>
+      <p class="card__note">Your order ID is in the WhatsApp message we sent you when you ordered.</p>
+    </div></div>
+  </div></section>
+  <section class="section"><div class="container">
+    <header class="section__head"><span class="eyebrow eyebrow--muted">FAQ</span><h2>Delivery questions</h2></header>
+    <div class="faq">
+      <details class="faq__item"><summary>How fast is delivery really?</summary><p>Most orders inside 5 km reach in 25–35 minutes. Late nights may take a little longer.</p></details>
+      <details class="faq__item"><summary>Is there a minimum order?</summary><p>No minimum. Even a single strip of paracetamol gets free delivery within 5 km.</p></details>
+      <details class="faq__item"><summary>What if I'm not home?</summary><p>The rider will call you. We can also hand it to a neighbour, guard, or family member if you tell us in advance.</p></details>
+      <details class="faq__item"><summary>Can I cancel after ordering?</summary><p>Yes, until the rider has left the store. Just WhatsApp us “cancel”.</p></details>
+    </div>
+  </div></section>
+</main>
+<div data-footer></div>
+<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="script.js" defer></script><script src="pages.js" defer></script>
+</body></html>
