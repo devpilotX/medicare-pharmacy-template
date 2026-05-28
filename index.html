@@ -3,50 +3,44 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>MediCare Pharmacy — Order Medicines & Home Delivery in Patna</title>
-<meta name="description" content="Order medicines on WhatsApp, upload prescriptions, free home delivery within 5 km in Patna. Open 8 AM – 11 PM, 7 days a week."/>
+<meta name="description" content="Order medicines on WhatsApp, upload prescriptions, free home delivery within 5 km in Patna."/>
 <meta name="theme-color" content="#0f9d8a"/>
-<meta property="og:title" content="MediCare Pharmacy — Medicines & Home Delivery in Patna"/>
-<meta property="og:description" content="Free home delivery in 30 minutes. Upload prescriptions on WhatsApp."/>
-<meta property="og:image" content="assets/og-image.svg"/>
-<meta property="og:type" content="website"/>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
-<link rel="manifest" href="manifest.json"/>
+<meta property="og:title" content="MediCare Pharmacy"/><meta property="og:image" content="assets/og-image.svg"/>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <body data-page="home">
 <div data-header></div>
 <main>
-  <section class="hero">
-    <div class="container hero__grid">
-      <div class="hero__copy">
-        <span class="eyebrow"><span class="dot"></span> Open now · 8 AM – 11 PM</span>
-        <h1>Medicines delivered to your door in <span class="accent">under 30 minutes</span>.</h1>
-        <p class="lede">Search 5,000+ medicines, upload your prescription, and order on WhatsApp. Free home delivery within 5 km across Patna.</p>
-        <div class="hero__cta"><a class="btn btn--primary btn--lg" href="medicines.html">Browse medicines</a><a class="btn btn--ghost btn--lg" data-action="whatsapp" href="#">Order on WhatsApp</a></div>
-        <ul class="hero__trust"><li><strong>100%</strong> Genuine medicines</li><li><strong>30 min</strong> Average delivery</li><li><strong>4.9★</strong> 1,200+ happy customers</li></ul>
-      </div>
-      <aside class="hero__card"><div class="card"><div class="card__header"><h2>Quick order</h2><span class="pill">Free delivery</span></div>
-        <label class="field"><span>Medicine name</span><input type="text" id="quickMedicine" placeholder="e.g. Dolo 650"/></label>
-        <label class="field"><span>Quantity</span><input type="number" id="quickQty" min="1" value="1"/></label>
-        <label class="field"><span>Delivery area</span><input type="text" id="quickArea" placeholder="e.g. Boring Road"/></label>
-        <button class="btn btn--primary btn--block" id="quickOrderBtn">Send order on WhatsApp</button>
-        <p class="card__note">No app needed. We confirm within 5 minutes.</p>
-      </div></aside>
-    </div><div class="hero__glow"></div>
-  </section>
-  <section class="strip"><div class="container strip__inner"><div><span>✓</span> Licensed pharmacists</div><div><span>✓</span> Cash or UPI on delivery</div><div><span>✓</span> Refill reminders</div><div><span>✓</span> Prescription privacy</div></div></section>
+  <section class="hero"><div class="container hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow"><span class="dot"></span> <span data-i18n="open_now">Open now · 8 AM – 11 PM</span></span>
+      <h1><span data-i18n="home_h1_a">Medicines delivered to your door in</span> <span class="accent" data-i18n="home_h1_b">under 30 minutes</span><span data-i18n="home_h1_c">.</span></h1>
+      <p class="lede" data-i18n="home_lede">Search 5,000+ medicines, upload your prescription, and order on WhatsApp. Free home delivery within 5 km across Patna.</p>
+      <div class="hero__cta"><a class="btn btn--primary btn--lg" href="medicines.html" data-i18n="cta_browse">Browse medicines</a><a class="btn btn--ghost btn--lg" data-action="whatsapp" href="#" data-i18n="cta_order_wa">Order on WhatsApp</a></div>
+      <ul class="hero__trust"><li><strong>100%</strong> <span data-i18n="trust_genuine">Genuine medicines</span></li><li><strong>30 min</strong> <span data-i18n="trust_fast">Average delivery</span></li><li><strong>4.9★</strong> <span data-i18n="trust_rating">1,200+ happy customers</span></li></ul>
+    </div>
+    <aside class="hero__card"><div class="card"><div class="card__header"><h2 data-i18n="quick_h">Quick order</h2><span class="pill" data-i18n="free_delivery">Free delivery</span></div>
+      <label class="field"><span data-i18n="quick_med">Medicine name</span><input type="text" id="quickMedicine" placeholder="Dolo 650"/></label>
+      <label class="field"><span data-i18n="quick_qty">Quantity</span><input type="number" id="quickQty" min="1" value="1"/></label>
+      <label class="field"><span data-i18n="quick_area">Delivery area</span><input type="text" id="quickArea" placeholder="Boring Road"/></label>
+      <button class="btn btn--primary btn--block" id="quickOrderBtn" data-i18n="quick_btn">Send order on WhatsApp</button>
+      <p class="card__note" data-i18n="quick_note">No app needed. We confirm within 5 minutes.</p>
+    </div></aside>
+  </div><div class="hero__glow"></div></section>
+  <section class="strip"><div class="container strip__inner"><div><span>✓</span> <span data-i18n="strip_licensed">Licensed pharmacists</span></div><div><span>✓</span> <span data-i18n="strip_pay">Cash or UPI on delivery</span></div><div><span>✓</span> <span data-i18n="strip_refill">Refill reminders</span></div><div><span>✓</span> <span data-i18n="strip_priv">Prescription privacy</span></div></div></section>
   <section class="section"><div class="container">
-    <header class="section__head"><span class="eyebrow eyebrow--muted">Best sellers</span><h2>Popular this week</h2><p>Most-ordered medicines by our neighbours in Patna.</p></header>
+    <header class="section__head"><span class="eyebrow eyebrow--muted" data-i18n="best_sellers">Best sellers</span><h2 data-i18n="popular_h">Popular this week</h2><p data-i18n="popular_p">Most-ordered medicines by our neighbours in Patna.</p></header>
     <div class="grid grid--meds" id="featuredMeds"></div>
-    <div style="text-align:center;margin-top:36px"><a class="btn btn--ghost" href="medicines.html">See all medicines →</a></div>
+    <div style="text-align:center;margin-top:36px"><a class="btn btn--ghost" href="medicines.html" data-i18n="see_all">See all medicines →</a></div>
   </div></section>
   <section class="section section--alt"><div class="container split">
-    <div class="split__copy"><span class="eyebrow eyebrow--muted">Prescription</span><h2>Snap. Send. Done.</h2>
-      <p>Click a photo of your doctor's prescription. We'll read it, confirm the medicines, and deliver to your door — usually within 30 minutes.</p>
-      <ol class="steps"><li><strong>1.</strong> Click a photo of the prescription</li><li><strong>2.</strong> Send it on WhatsApp — we reply in 5 minutes</li><li><strong>3.</strong> Pay on delivery (Cash / UPI)</li></ol>
-      <a class="btn btn--primary" href="prescription.html">Upload prescription</a></div>
+    <div class="split__copy"><span class="eyebrow eyebrow--muted" data-i18n="rx_eye">Prescription</span><h2 data-i18n="rx_h">Snap. Send. Done.</h2>
+      <p data-i18n="rx_p">Click a photo of your doctor's prescription. We'll read it, confirm the medicines, and deliver to your door — usually within 30 minutes.</p>
+      <ol class="steps"><li><strong>1.</strong> <span data-i18n="rx_step1">Click a photo of the prescription</span></li><li><strong>2.</strong> <span data-i18n="rx_step2">Send it on WhatsApp — we reply in 5 minutes</span></li><li><strong>3.</strong> <span data-i18n="rx_step3">Pay on delivery (Cash / UPI)</span></li></ol>
+      <a class="btn btn--primary" href="prescription.html" data-i18n="rx_upload">Upload prescription</a></div>
     <div class="split__visual"><div class="phone"><div class="phone__notch"></div><div class="phone__screen">
       <div class="bubble bubble--in">Hi! Please share your prescription 📋</div>
       <div class="bubble bubble--out bubble--img">📷 Prescription.jpg</div>
@@ -55,25 +49,25 @@
     </div></div></div>
   </div></section>
   <section class="section"><div class="container">
-    <header class="section__head"><span class="eyebrow eyebrow--muted">Why us</span><h2>Free, fast, and tracked</h2><p>Delivery riders in every neighbourhood. Live updates from store to door.</p></header>
+    <header class="section__head"><span class="eyebrow eyebrow--muted" data-i18n="why_eye">Why us</span><h2 data-i18n="why_h">Free, fast, and tracked</h2><p data-i18n="why_p">Delivery riders in every neighbourhood. Live updates from store to door.</p></header>
     <div class="grid grid--features">
-      <div class="feature"><div class="feature__icon">🛵</div><h3>Under 30 minutes</h3><p>Average delivery time across 5 km from our store.</p></div>
-      <div class="feature"><div class="feature__icon">💸</div><h3>Cash or UPI</h3><p>Pay your way — UPI, cash, or card on delivery.</p></div>
-      <div class="feature"><div class="feature__icon">🔁</div><h3>Refill reminders</h3><p>Monthly medicines? We'll WhatsApp you before you run out.</p></div>
-      <div class="feature"><div class="feature__icon">🔒</div><h3>Private & safe</h3><p>Prescriptions stored securely. Discreet packaging.</p></div>
+      <div class="feature"><div class="feature__icon">🛵</div><h3 data-i18n="f1_h">Under 30 minutes</h3><p data-i18n="f1_p">Average delivery time across 5 km from our store.</p></div>
+      <div class="feature"><div class="feature__icon">💸</div><h3 data-i18n="f2_h">Cash or UPI</h3><p data-i18n="f2_p">Pay your way — UPI, cash, or card on delivery.</p></div>
+      <div class="feature"><div class="feature__icon">🔁</div><h3 data-i18n="f3_h">Refill reminders</h3><p data-i18n="f3_p">Monthly medicines? We'll WhatsApp you before you run out.</p></div>
+      <div class="feature"><div class="feature__icon">🔒</div><h3 data-i18n="f4_h">Private & safe</h3><p data-i18n="f4_p">Prescriptions stored securely. Discreet packaging.</p></div>
     </div>
   </div></section>
   <section class="section section--alt"><div class="container">
-    <header class="section__head"><span class="eyebrow eyebrow--muted">Reviews</span><h2>Trusted by 1,200+ neighbours</h2></header>
+    <header class="section__head"><span class="eyebrow eyebrow--muted" data-i18n="rev_eye">Reviews</span><h2 data-i18n="rev_h">Trusted by 1,200+ neighbours</h2></header>
     <div class="grid grid--reviews">
-      <blockquote class="review"><p>"Got my mother's BP medicines at 10 PM. Delivered in 22 minutes. Amazing service."</p><cite>— Rohit S., Boring Road</cite></blockquote>
-      <blockquote class="review"><p>"WhatsApp ordering is so easy. They even remind me before my dad's diabetes refill runs out."</p><cite>— Priya K., Rajendra Nagar</cite></blockquote>
-      <blockquote class="review"><p>"Prices are same as the shop, but I don't have to step out. Highly recommend."</p><cite>— Anil G., Kankarbagh</cite></blockquote>
+      <blockquote class="review"><p data-i18n="rev_1">"Got my mother's BP medicines at 10 PM. Delivered in 22 minutes. Amazing service."</p><cite data-i18n="rev_1_c">— Rohit S., Boring Road</cite></blockquote>
+      <blockquote class="review"><p data-i18n="rev_2">"WhatsApp ordering is so easy."</p><cite data-i18n="rev_2_c">— Priya K., Rajendra Nagar</cite></blockquote>
+      <blockquote class="review"><p data-i18n="rev_3">"Prices are same as the shop, but I don't have to step out."</p><cite data-i18n="rev_3_c">— Anil G., Kankarbagh</cite></blockquote>
     </div>
   </div></section>
-  <section class="cta-band"><div class="container cta-band__inner"><div><h2>Need something now?</h2><p>Send us a WhatsApp message. We reply within 5 minutes.</p></div><a class="btn btn--primary btn--lg" data-action="whatsapp" href="#">Chat on WhatsApp</a></div></section>
+  <section class="cta-band"><div class="container cta-band__inner"><div><h2 data-i18n="cta_band_h">Need something now?</h2><p data-i18n="cta_band_p">Send us a WhatsApp message. We reply within 5 minutes.</p></div><a class="btn btn--primary btn--lg" data-action="whatsapp" href="#" data-i18n="cta_chat_wa">Chat on WhatsApp</a></div></section>
 </main>
 <div data-footer></div>
-<a class="fab" data-action="whatsapp" href="#" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
-<script src="script.js" defer></script><script src="pages.js" defer></script>
+<a class="fab" data-action="whatsapp" href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20.5 3.5A11 11 0 0 0 3.6 17.3L2 22l4.8-1.5A11 11 0 1 0 20.5 3.5Zm-8.4 16.8a8.9 8.9 0 0 1-4.5-1.2l-.3-.2-2.9.9.9-2.8-.2-.3a8.9 8.9 0 1 1 7 3.6Z"/></svg></a>
+<script src="i18n.js"></script><script src="script.js"></script><script src="pages.js"></script>
 </body></html>

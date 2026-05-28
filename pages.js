@@ -1,11 +1,20 @@
-// MediCare — page dispatcher. Reads <body data-page="..."> and runs the right setup.
+// MediCare — page dispatcher.
 const P = document.body.dataset.page || 'home';
+const _T = window.t || function (k) { return k; };
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 let MEDS = null;
-function loadMeds() { return MEDS ? Promise.resolve(MEDS) : fetch('assets/medicines.json').then(r => r.json()).then(d => MEDS = d); }
+function catKey(c) { return ({ 'Pain Relief':'cat_pain','Diabetes':'cat_diabetes','Heart':'cat_heart','Vitamins':'cat_vitamins','Cold & Cough':'cat_cold','Antibiotic':'cat_antibiotic','Digestive':'cat_digestive','Allergy':'cat_allergy','First Aid':'cat_first_aid' })[c]; }
+function catLabel(c) { const k = catKey(c); return k ? _T(k) : c; }
+function loadMeds() {
+  if (MEDS) return Promise.resolve(MEDS);
+  // Prefer admin-edited inventory if present
+  const inv = window.Inventory ? window.Inventory.load(null) : null;
+  if (inv && Array.isArray(inv) && inv.length) { MEDS = inv; return Promise.resolve(MEDS); }
+  return fetch('assets/medicines.json').then(r => r.json()).then(d => { MEDS = d; if (window.Inventory) window.Inventory.save(d); return d; });
+}
 function medCard(m, idx) {
-  return '<article class="med"><div class="med__top"><div><div class="med__name">' + esc(m.name) + '</div><p class="med__sub">' + esc(m.salt || '') + (m.pack ? ' · ' + esc(m.pack) : '') + '</p></div><span class="med__cat">' + esc(m.category) + '</span></div>'
-  + '<div class="med__row"><div class="med__price">₹' + m.price + '<small> /pack</small></div><button class="med__btn" data-add="' + idx + '">Add</button></div></article>';
+  return '<article class="med"><div class="med__top"><div><div class="med__name">' + esc(m.name) + '</div><p class="med__sub">' + esc(m.salt || '') + (m.pack ? ' · ' + esc(m.pack) : '') + '</p></div><span class="med__cat">' + esc(catLabel(m.category)) + '</span></div>'
+  + '<div class="med__row"><div class="med__price">₹' + m.price + '<small> /pack</small></div><button class="med__btn" data-add="' + idx + '">' + _T('add') + '</button></div></article>';
 }
 function bindAdd(root) {
   (root || document).querySelectorAll('[data-add]').forEach(btn => {
@@ -13,8 +22,8 @@ function bindAdd(root) {
     btn.addEventListener('click', () => {
       const m = MEDS[parseInt(btn.dataset.add, 10)]; if (!m) return;
       window.Cart.add(m, 1);
-      const orig = btn.textContent; btn.textContent = 'Added ✓'; btn.classList.add('is-added');
-      setTimeout(() => { btn.textContent = orig; btn.classList.remove('is-added'); }, 1200);
+      btn.textContent = _T('added'); btn.classList.add('is-added');
+      setTimeout(() => { btn.textContent = _T('add'); btn.classList.remove('is-added'); }, 1200);
     });
   });
 }
@@ -45,14 +54,14 @@ if (P === 'medicines') {
     if (s === 'price-asc') list.sort((a, b) => a.m.price - b.m.price);
     else if (s === 'price-desc') list.sort((a, b) => b.m.price - a.m.price);
     else if (s === 'name') list.sort((a, b) => a.m.name.localeCompare(b.m.name));
-    countEl.textContent = list.length + ' result' + (list.length === 1 ? '' : 's');
+    countEl.textContent = list.length + ' ' + (window.LANG === 'hi' ? 'परिणाम' : ('result' + (list.length === 1 ? '' : 's')));
     empty.hidden = list.length > 0;
     grid.innerHTML = list.map(x => medCard(x.m, x.i)).join('');
     bindAdd(grid);
   }
   loadMeds().then(() => {
     const cats = Array.from(new Set(MEDS.map(m => m.category))).sort();
-    chips.innerHTML = '<button class="chip is-active" data-cat="all">All</button>' + cats.map(c => '<button class="chip" data-cat="' + esc(c) + '">' + esc(c) + '</button>').join('');
+    chips.innerHTML = '<button class="chip is-active" data-cat="all">' + _T('cat_all') + '</button>' + cats.map(c => '<button class="chip" data-cat="' + esc(c) + '">' + esc(catLabel(c)) + '</button>').join('');
     chips.addEventListener('click', e => {
       const b = e.target.closest('.chip'); if (!b) return;
       cat = b.dataset.cat;
@@ -103,16 +112,15 @@ if (P === 'cart') {
         cob = document.getElementById('checkoutBtn'), clb = document.getElementById('clearBtn');
   function row(i) {
     return '<div class="cart-row" data-name="' + esc(i.name) + '"><div><div class="cart-row__name">' + esc(i.name) + '</div><p class="cart-row__sub">' + esc(i.salt || '') + (i.pack ? ' · ' + esc(i.pack) : '') + '</p></div>'
-    + '<div class="qty"><button class="qty__btn" data-dec aria-label="Decrease">−</button><input class="qty__input" type="number" min="1" value="' + i.qty + '" /><button class="qty__btn" data-inc aria-label="Increase">+</button></div>'
-    + '<div class="cart-row__price">₹' + (i.qty * i.price) + '</div><button class="cart-row__remove" data-remove aria-label="Remove">×</button></div>';
+    + '<div class="qty"><button class="qty__btn" data-dec aria-label="−">−</button><input class="qty__input" type="number" min="1" value="' + i.qty + '" /><button class="qty__btn" data-inc aria-label="+">+</button></div>'
+    + '<div class="cart-row__price">₹' + (i.qty * i.price) + '</div><button class="cart-row__remove" data-remove aria-label="×">×</button></div>';
   }
   function render() {
     const it = window.Cart.get();
     if (!it.length) { list.innerHTML = ''; empty.hidden = false; cob.disabled = true; clb.disabled = true; }
     else { empty.hidden = true; cob.disabled = false; clb.disabled = false; list.innerHTML = it.map(row).join(''); }
     const s = window.Cart.total();
-    subEl.textContent = '₹' + s;
-    totEl.textContent = '₹' + s;
+    subEl.textContent = '₹' + s; totEl.textContent = '₹' + s;
   }
   list.addEventListener('click', e => {
     const w = e.target.closest('.cart-row'); if (!w) return;
@@ -133,9 +141,14 @@ if (P === 'cart') {
     const ad = (document.getElementById('coAddress').value || '').trim();
     const py = document.getElementById('coPay').value;
     if (!n || !ph || !ad) return alert('Please fill name, phone, and delivery address.');
+    const total = window.Cart.total();
+    const order = { id: window.makeOrderId(), customer: { name: n, phone: ph, address: ad }, items: it, total: total, payment: py, status: 'Pending', createdAt: new Date().toISOString() };
+    window.Orders.add(order);
     const lines = it.map(i => '• ' + i.name + ' × ' + i.qty + ' = ₹' + (i.qty * i.price));
-    const msg = ['Hi ' + window.PHARMACY_CONFIG.name + ', I would like to place this order:', '', 'Customer: ' + n, 'Phone: ' + ph, 'Address: ' + ad, 'Payment: ' + py, '', 'Items:'].concat(lines, ['', 'Total: ₹' + window.Cart.total(), 'Delivery: Free']).join('\n');
+    const msg = ['Hi ' + window.PHARMACY_CONFIG.name + ', new order ' + order.id + ':', '', 'Customer: ' + n, 'Phone: ' + ph, 'Address: ' + ad, 'Payment: ' + py, '', 'Items:'].concat(lines, ['', 'Total: ₹' + total, 'Delivery: Free']).join('\n');
+    window.Cart.clear();
     window.open(window.waUrl(msg), '_blank', 'noopener');
+    alert('Order ' + order.id + ' saved. We are opening WhatsApp to confirm.');
   });
   clb.addEventListener('click', () => { if (confirm('Clear all items from your cart?')) window.Cart.clear(); });
   render();
