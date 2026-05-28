@@ -27,7 +27,9 @@ document.title = `${CFG.name} — Medicines, Prescriptions & Home Delivery`;
 const mapFrame = document.getElementById('mapFrame');
 if (mapFrame) mapFrame.src = CFG.maps;
 const dirBtn = document.getElementById('directionsBtn');
-if (dirBtn) dirBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(CFG.address)}`;
+if (dirBtn) {
+  dirBtn.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(CFG.address);
+}
 
 // Year
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -35,7 +37,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 // ---------- WhatsApp helper ----------
 function waUrl(message) {
   const text = encodeURIComponent(message || `Hi ${CFG.name}, I'd like to place an order.`);
-  return `https://wa.me/${CFG.whatsapp}?text=${text}`;
+  return 'https://wa.me/' + CFG.whatsapp + '?text=' + text;
 }
 
 document.querySelectorAll('[data-action="whatsapp"]').forEach(el => {
